@@ -19,10 +19,7 @@ export class Counter extends Component {
   };
 
   evaluateClass = () => {
-    const prependClass = "badge badge-";
-    return this.state.value <= 0
-      ? prependClass + "warning"
-      : prependClass + "light";
+    return this.state.value <= 0 ? "warning" : "light";
   };
 
   render() {
@@ -33,7 +30,9 @@ export class Counter extends Component {
           -{" "}
         </button>
         <h2>
-          <span className={this.evaluateClass()}>{this.state.value}</span>
+          <span className={`badge badge-${this.evaluateClass()}`}>
+            {this.state.value}
+          </span>
         </h2>
         <button onClick={this.handleIncrement} className="btn btn-primary">
           {" "}
