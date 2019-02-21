@@ -8,14 +8,21 @@ export class Counter extends Component {
     const newValue = this.state.value + 1;
     this.setState({ value: newValue });
   };
+
   handleDecrement = () => {
-    if (this.state.value === 0) {
+    if (this.state.value <= 0) {
       return;
-    } else {
-      // cannot mutate state directly, so create a new variable
-      const newValue = this.state.value - 1;
-      this.setState({ value: newValue });
     }
+    // cannot mutate state directly, so create a new variable
+    const newValue = this.state.value - 1;
+    this.setState({ value: newValue });
+  };
+
+  evaluateClass = () => {
+    const prependClass = "badge badge-";
+    return this.state.value <= 0
+      ? prependClass + "warning"
+      : prependClass + "light";
   };
 
   render() {
@@ -26,7 +33,7 @@ export class Counter extends Component {
           -{" "}
         </button>
         <h2>
-          <span className="badge badge-secondary">{this.state.value}</span>
+          <span className={this.evaluateClass()}>{this.state.value}</span>
         </h2>
         <button onClick={this.handleIncrement} className="btn btn-primary">
           {" "}
