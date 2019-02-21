@@ -41,6 +41,13 @@ export class Counter extends Component {
         >
           {"  "}-{"  "}
         </button>
+        <br />
+        <button
+          onClick={() => this.props.handleDelete(this.state.id)}
+          className="btn btn-sm btn-danger mt-3"
+        >
+          {"  "}Delete{"  "}
+        </button>
       </div>
     );
   }
