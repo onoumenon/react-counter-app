@@ -1,56 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
 
-export class Counter extends Component {
-  state = { id: this.props.id, value: this.props.value };
-
-  handleIncrement = () => {
-    // cannot mutate state directly, so create a new variable
-    const newValue = this.state.value + 1;
-    this.setState({ value: newValue });
+export function Counter(props) {
+  const evaluateClass = () => {
+    return props.value <= 0 ? "warning" : "light";
   };
 
-  handleDecrement = () => {
-    // cannot mutate state directly, so create a new variable
-    const newValue = this.state.value - 1;
-    this.setState({ value: newValue });
-  };
+  return (
+    <div className="badge badge-light">
+      <button
+        onClick={() => props.handleIncrement(props.id)}
+        className="btn btn-sm btn-primary"
+      >
+        {" "}
+        +{" "}
+      </button>
+      <h2>
+        <span className={`badge badge-${evaluateClass()}`}>{props.value}</span>
+      </h2>
 
-  evaluateClass = () => {
-    return this.state.value <= 0 ? "warning" : "light";
-  };
-
-  render() {
-    return (
-      <div className="badge badge-light">
-        <button
-          onClick={this.handleIncrement}
-          className="btn btn-sm btn-primary"
-        >
-          {" "}
-          +{" "}
-        </button>
-        <h2>
-          <span className={`badge badge-${this.evaluateClass()}`}>
-            {this.state.value}
-          </span>
-        </h2>
-
-        <button
-          onClick={this.handleDecrement}
-          className="btn btn-sm btn-primary"
-        >
-          {"  "}-{"  "}
-        </button>
-        <br />
-        <button
-          onClick={() => this.props.handleDelete(this.state.id)}
-          className="btn btn-sm btn-danger mt-3"
-        >
-          {"  "}Delete{"  "}
-        </button>
-      </div>
-    );
-  }
+      <button
+        onClick={() => props.handleDecrement(props.id)}
+        className="btn btn-sm btn-primary"
+      >
+        {"  "}-{"  "}
+      </button>
+      <br />
+      <button
+        onClick={() => props.handleDelete(props.id)}
+        className="btn btn-sm btn-danger mt-3"
+      >
+        {"  "}Delete{"  "}
+      </button>
+    </div>
+  );
 }
 
 export default Counter;
